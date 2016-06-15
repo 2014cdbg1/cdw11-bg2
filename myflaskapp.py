@@ -7,12 +7,15 @@ import os
 import init
 #bg2
 import users.b.g2.bg2_40123235
+import users.b.g2.bg2_40123214
 import users.b.g2.bg2_40123232_cdw12
+import users.b.g2.bg2_40123214_cdw12
 import users.b.g2.bg2_40123235_cdw12
 import users.b.g2.bg2_40123202
 import users.b.g2.bg2_40123202_1
 import users.b.g2.bg2_40123232_cdw14
 import users.b.g2.bg2_40123235_cdw14
+import users.b.g2.bg2_40123214_cdw14
 
 
 # 確定程式檔案所在目錄, 在 Windows 有最後的反斜線
@@ -387,9 +390,12 @@ if __name__ == "__main__":
 #bg2
 app.register_blueprint(users.b.g2.bg2_40123235.bg2_40123235)
 app.register_blueprint(users.b.g2.bg2_40123202.bg2_40123202)
+app.register_blueprint(users.b.g2.bg2_40123214.bg2_40123214)
 app.register_blueprint(users.b.g2.bg2_40123235_cdw12.b40123235)
 app.register_blueprint(users.b.g2.bg2_40123232_cdw12.b40123232)
+app.register_blueprint(users.b.g2.bg2_40123214_cdw12.b40123214)
 app.register_blueprint(users.b.g2.bg2_40123202_1.b40123202)
 app.register_blueprint(users.b.g2.bg2_40123235_cdw14.b40123235_1)
 app.register_blueprint(users.b.g2.bg2_40123232_cdw14.b40123232_1)
+app.register_blueprint(users.b.g2.bg2_40123214_cdw14.b40123214_1)
 
