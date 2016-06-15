@@ -3,11 +3,11 @@ from flask import Blueprint, render_template
 # 這裡設定的 template_folder 為 template 搜尋目錄, 表示位於 user/g1/templates 目錄中
 # 但是若 wcmw14/templates 目錄中有相同名稱的 template file, 則優先取外部的檔案
 # 這樣的設計希望可以在統整各藍圖時, 可以隨時根據需要改寫 template 配置
-b40123235_1 = Blueprint('b40123235_1', __name__, url_prefix='/b40123235_1', template_folder='templates')
+b40123232_1 = Blueprint('b40123232_1', __name__, url_prefix='/b40123232_1', template_folder='templates')
 
-@b40123235_1.route('/fourgear', defaults={'n1':15,'n2':20,'n3':18,'n4':20})
-@b40123235_1.route('/fourgear/<n1>/<n2>/<n3>/<n4>')
-def fourgear(n1, n2, n3, n4):
+@b40123232_1.route('/fivegear', defaults={'n1':15,'n2':20,'n3':18,'n4':20, 'n5':35})
+@b40123232_1.route('/fivegear/<n1>/<n2>/<n3>/<n4>/<n5>')
+def fivegear(n1, n2, n3, n4, n5):
     # 真正最後的架構應該要在函式中準備繪圖所需的資料, 然後用 template 呈現內容
     title = "網際 2D 繪圖"
     head = '''
@@ -36,7 +36,7 @@ brython(1);
     # 模數計算 m = canvas.width*0.8/(n1+n2+n3)
     # max([int(n1), int(n2), int(n3)])
     # 所以 height = 1.2*800*0.8/(int(n1)+int(n2)+int(n3))*max([int(n1), int(n2), int(n3)])
-    height = 1.2*800*0.8/(int(n1)+int(n2)+int(n3)+int(n4))*max([int(n1), int(n2), int(n3), int(n4)])
+    height = 1.2*800*0.8/(int(n1)+int(n2)+int(n3)+int(n4)+int(n5))*max([int(n1), int(n2), int(n3), int(n4), int(n5)])
     body = '''
     
 延伸應用:<br />
@@ -132,18 +132,21 @@ n1 = '''+str(n1)+'''
 n2 = '''+str(n2)+'''
 n3 = '''+str(n3)+'''
 n4 = '''+str(n4)+'''
- 
+n5 = '''+str(n5)+''' 
+
 # m 為模數, 根據畫布的寬度, 計算適合的模數大小
 # Module = mm of pitch diameter per tooth
 # 利用 80% 的畫布寬度進行繪圖
 # 計算模數的對應尺寸
-m = canvas.width*0.8/(n1+n2+n3+n4)
+m = canvas.width*0.8/(n1+n2+n3+n4+n5)
  
 # 根據齒數與模組計算各齒輪的節圓半徑
 pr1 = n1*m/2
 pr2 = n2*m/2
 pr3 = n3*m/2
 pr4 = n4*m/2
+pr5 = n5*m/2
+
  
 # 畫布左右兩側都保留畫布寬度的 10%
 # 依此計算對應的最左邊齒輪的軸心座標
@@ -165,6 +168,7 @@ spur(cx+pr1+pr2, cy, m, n2, pa, 180-180/n2)
 # 而當第2齒從與第3齒囓合的定位線, 逆時鐘旋轉 180-180/n2 角度後, 原先囓合的第3齒必須要再配合旋轉 (180-180/n2 )*n2/n3
 spur(cx+pr1+pr2+pr2+pr3, cy, m, n3, pa, 180-180/n3+(180-180/n2)*n2/n3)
 spur(cx+pr1+pr2+pr2+pr3+pr3+pr4, cy, m, n4, pa, 180-180/n4+(180-180/n3+(180-180/n2)*n2/n3)*n3/n4)
+spur(cx+pr1+pr2+pr2+pr3+pr3+pr4+pr4+pr5, cy, m, n5, pa, 180-180/n5+(180-180/n4+(180-180/n3+(180-180/n2)*n2/n3)*n3/n4)*n4/n5)
 </script>
 '''
     bodystring = "<body>" + body+"</body>"
